@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SCMS.API.Data;
 
 namespace SCMS.API.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20211025195052_Fix-ActivitiesTable")]
+    partial class FixActivitiesTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -150,7 +152,23 @@ namespace SCMS.API.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("SCMS.API.Authentication.Models.User", b =>
+            modelBuilder.Entity("SCMS.API.Features.ActivitiesManagement.Models.Activity", b =>
+                {
+                    b.Property<int>("ActivityId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("ActivityName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("ActivityId");
+
+                    b.ToTable("Activities");
+                });
+
+            modelBuilder.Entity("SCMS.API.Features.Models.User", b =>
                 {
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
@@ -195,9 +213,6 @@ namespace SCMS.API.Migrations
                     b.Property<bool>("PhoneNumberConfirmed")
                         .HasColumnType("bit");
 
-                    b.Property<string>("Role")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("nvarchar(max)");
 
@@ -206,6 +221,9 @@ namespace SCMS.API.Migrations
 
                     b.Property<bool>("TwoFactorEnabled")
                         .HasColumnType("bit");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("UserName")
                         .HasMaxLength(256)
@@ -235,7 +253,7 @@ namespace SCMS.API.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
-                    b.HasOne("SCMS.API.Authentication.Models.User", null)
+                    b.HasOne("SCMS.API.Features.Models.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -244,7 +262,7 @@ namespace SCMS.API.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
-                    b.HasOne("SCMS.API.Authentication.Models.User", null)
+                    b.HasOne("SCMS.API.Features.Models.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -259,7 +277,7 @@ namespace SCMS.API.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("SCMS.API.Authentication.Models.User", null)
+                    b.HasOne("SCMS.API.Features.Models.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -268,7 +286,7 @@ namespace SCMS.API.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
-                    b.HasOne("SCMS.API.Authentication.Models.User", null)
+                    b.HasOne("SCMS.API.Features.Models.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)

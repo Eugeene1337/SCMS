@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using SCMS.API.Features.ActivitiesManagement.Models;
 using SCMS.API.Features.Models;
 
 namespace SCMS.API.Data
@@ -10,6 +11,8 @@ namespace SCMS.API.Data
             : base(options)
         {
         }
+
+        public DbSet<Activity> Activities { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
