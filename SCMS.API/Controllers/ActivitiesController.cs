@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using SCMS.API.DTO;
 using SCMS.API.Models;
 using SCMS.API.Repositories.Interfaces;
 using System;
@@ -37,12 +38,14 @@ namespace SCMS.API.Controllers
         }
 
         [HttpPost]
-        public IActionResult PostActivity([FromBody] Activity activity)
+        public IActionResult PostActivity([FromBody] CreateActivityDto createActivityDto)
         {
-            if (activity == null)
+            if (createActivityDto == null)
             {
                 return BadRequest();
             }
+
+            var activity = _mapper.Map<CreateActivityDto, Activity>(createActivityDto);
 
             _activitiesRepository.Add(activity);
 

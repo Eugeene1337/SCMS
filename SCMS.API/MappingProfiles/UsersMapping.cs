@@ -8,8 +8,8 @@ namespace SCMS.API.MappingProfiles
     {
         public UsersMapping()
         {
-            CreateMap<User, UserGetModel>().ReverseMap();
-            CreateMap<User, UserUpdateModel>().ReverseMap();
+            CreateMap<User, GetUserDto>().ReverseMap();
+            CreateMap<User, UpdateUserDto>().ReverseMap();
         }
     }
 }

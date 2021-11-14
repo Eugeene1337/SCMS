@@ -3,11 +3,13 @@ using System.ComponentModel.DataAnnotations;
 
 namespace SCMS.API.DTO
 {
-    public class UserUpdateModel
+    public class UpdateUserDto
     {
         public string Name { get; set; }
 
         public string Surname { get; set; }
+
+        public string PhoneNumber { get; set; }
 
         public DateTime BirthDate { get; set; }
 

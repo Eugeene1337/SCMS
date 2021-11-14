@@ -22,15 +22,15 @@ namespace SCMS.API.Controllers
         }
 
         [HttpGet]
-        public ActionResult<IEnumerable<UserGetModel>> GetUsers()
+        public ActionResult<IEnumerable<GetUserDto>> GetUsers()
         {
-            return _mapper.Map<List<User>, List<UserGetModel>>(_userRepository.GetAll());
+            return _mapper.Map<List<User>, List<GetUserDto>>(_userRepository.GetAll());
         }
 
         [HttpGet("{id}")]
-        public ActionResult<UserGetModel> GetUser(Guid id)
+        public ActionResult<GetUserDto> GetUser(Guid id)
         {
-            var user = _mapper.Map<User, UserGetModel>(_userRepository.GetSingle(id));
+            var user = _mapper.Map<User, GetUserDto>(_userRepository.GetSingle(id));
 
             if (user == null)
             {
@@ -41,7 +41,7 @@ namespace SCMS.API.Controllers
         }
 
         [HttpPut("{id}")]
-        public IActionResult UpdateUser(Guid id, UserUpdateModel userUpdateDto)
+        public IActionResult UpdateUser(Guid id, UpdateUserDto userUpdateDto)
         {
             if (userUpdateDto == null)
             {

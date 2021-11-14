@@ -4,6 +4,8 @@ C:\Users\zheny\source\repos\SCMS.API\SCMS.API\obj\Release\netcoreapp3.1\PubTmp\O
 C:\Users\zheny\source\repos\SCMS.API\SCMS.API\obj\Release\netcoreapp3.1\PubTmp\Out\SCMS.API.dll
 C:\Users\zheny\source\repos\SCMS.API\SCMS.API\obj\Release\netcoreapp3.1\PubTmp\Out\SCMS.API.runtimeconfig.json
 C:\Users\zheny\source\repos\SCMS.API\SCMS.API\obj\Release\netcoreapp3.1\PubTmp\Out\SCMS.API.pdb
+C:\Users\zheny\source\repos\SCMS.API\SCMS.API\obj\Release\netcoreapp3.1\PubTmp\Out\AutoMapper.dll
+C:\Users\zheny\source\repos\SCMS.API\SCMS.API\obj\Release\netcoreapp3.1\PubTmp\Out\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
 C:\Users\zheny\source\repos\SCMS.API\SCMS.API\obj\Release\netcoreapp3.1\PubTmp\Out\Microsoft.AspNetCore.Authentication.JwtBearer.dll
 C:\Users\zheny\source\repos\SCMS.API\SCMS.API\obj\Release\netcoreapp3.1\PubTmp\Out\Microsoft.AspNetCore.Cryptography.Internal.dll
 C:\Users\zheny\source\repos\SCMS.API\SCMS.API\obj\Release\netcoreapp3.1\PubTmp\Out\Microsoft.AspNetCore.Cryptography.KeyDerivation.dll

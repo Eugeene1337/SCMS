@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SCMS.API.Data;
 
 namespace SCMS.API.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20211114174313_AddForeignKeys")]
+    partial class AddForeignKeys
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -213,51 +215,6 @@ namespace SCMS.API.Migrations
                     b.ToTable("Packets");
                 });
 
-            modelBuilder.Entity("SCMS.API.Models.PacketsActivities", b =>
-                {
-                    b.Property<int>("PacketId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ActivityId")
-                        .HasColumnType("int");
-
-                    b.HasKey("PacketId", "ActivityId");
-
-                    b.HasIndex("ActivityId");
-
-                    b.ToTable("PacketsActivities");
-                });
-
-            modelBuilder.Entity("SCMS.API.Models.PacketsPayments", b =>
-                {
-                    b.Property<int>("PacketId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("PaymentId")
-                        .HasColumnType("int");
-
-                    b.HasKey("PacketId", "PaymentId");
-
-                    b.HasIndex("PaymentId");
-
-                    b.ToTable("PacketsPayments");
-                });
-
-            modelBuilder.Entity("SCMS.API.Models.PacketsUsers", b =>
-                {
-                    b.Property<int>("PacketId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("PacketId", "UserId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("PacketsUsers");
-                });
-
             modelBuilder.Entity("SCMS.API.Models.Payment", b =>
                 {
                     b.Property<int>("PaymentId")
@@ -271,13 +228,10 @@ namespace SCMS.API.Migrations
                     b.Property<double>("PaymentAmount")
                         .HasColumnType("float");
 
-                    b.Property<string>("UserId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.HasKey("PaymentId");
-
-                    b.HasIndex("UserId");
 
                     b.ToTable("Payments");
                 });
@@ -368,21 +322,6 @@ namespace SCMS.API.Migrations
                     b.ToTable("AspNetUsers");
                 });
 
-            modelBuilder.Entity("SCMS.API.Models.UsersClasses", b =>
-                {
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<int>("ClassId")
-                        .HasColumnType("int");
-
-                    b.HasKey("UserId", "ClassId");
-
-                    b.HasIndex("ClassId");
-
-                    b.ToTable("UsersClasses");
-                });
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -445,75 +384,6 @@ namespace SCMS.API.Migrations
                     b.HasOne("SCMS.API.Models.User", null)
                         .WithMany()
                         .HasForeignKey("TrainerUserId");
-                });
-
-            modelBuilder.Entity("SCMS.API.Models.PacketsActivities", b =>
-                {
-                    b.HasOne("SCMS.API.Models.Activity", null)
-                        .WithMany()
-                        .HasForeignKey("ActivityId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("SCMS.API.Models.Packet", null)
-                        .WithMany()
-                        .HasForeignKey("PacketId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("SCMS.API.Models.PacketsPayments", b =>
-                {
-                    b.HasOne("SCMS.API.Models.Packet", null)
-                        .WithMany()
-                        .HasForeignKey("PacketId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("SCMS.API.Models.Payment", null)
-                        .WithMany()
-                        .HasForeignKey("PaymentId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("SCMS.API.Models.PacketsUsers", b =>
-                {
-                    b.HasOne("SCMS.API.Models.Packet", null)
-                        .WithMany()
-                        .HasForeignKey("PacketId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("SCMS.API.Models.User", null)
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("SCMS.API.Models.Payment", b =>
-                {
-                    b.HasOne("SCMS.API.Models.User", null)
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("SCMS.API.Models.UsersClasses", b =>
-                {
-                    b.HasOne("SCMS.API.Models.Class", null)
-                        .WithMany()
-                        .HasForeignKey("ClassId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("SCMS.API.Models.User", null)
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

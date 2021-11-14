@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using SCMS.API.DTO;
 using SCMS.API.Models;
 using SCMS.API.Repositories.Interfaces;
 using System;
@@ -37,13 +38,14 @@ namespace SCMS.API.Controllers
         }
 
         [HttpPost]
-        public IActionResult PostPacket([FromBody] Packet packet)
+        public IActionResult PostPacket([FromBody] CreatePacketDto createPacketDto)
         {
-            if (packet == null)
+            if (createPacketDto == null)
             {
                 return BadRequest();
             }
 
+            var packet = _mapper.Map<CreatePacketDto, Packet>(createPacketDto);
             _packetsRepository.Add(packet);
 
             if (!_packetsRepository.Save())

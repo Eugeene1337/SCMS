@@ -1,22 +1,15 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
-using Newtonsoft.Json;
 
-namespace SCMS.API.Models
+namespace SCMS.API.DTO
 {
-    public class Class
+    public class CreateClassDto
     {
-        [Key]
-        public int ClassId { get; set; }
-
         [Required]
         public int ActivityId { get; set; }
-
         [Required]
         public DateTime DateTime { get; set; }
-
         public int Duration { get; set; }
-
-        public string TrainerUserId { get; set; }
+        public Guid TrainerUserId { get; set; }
     }
 }

@@ -13,6 +13,7 @@ using System.Linq;
 using SCMS.API.Models;
 using SCMS.API.DTO;
 using SCMS.API.Data;
+using AutoMapper;
 
 namespace SCMS.API.Controllers
 {
@@ -23,12 +24,14 @@ namespace SCMS.API.Controllers
         private readonly UserManager<User> _userManager;
         private readonly RoleManager<IdentityRole> _roleManager;
         private readonly IConfiguration _configuration;
+        private readonly IMapper _mapper;
 
-        public AuthenticateController(UserManager<User> userManager, RoleManager<IdentityRole> roleManager, IConfiguration configuration)
+        public AuthenticateController(UserManager<User> userManager, RoleManager<IdentityRole> roleManager, IConfiguration configuration, IMapper mapper)
         {
             _userManager = userManager;
             _roleManager = roleManager;
             _configuration = configuration;
+            _mapper = mapper;
         }
 
         [HttpPost]
@@ -64,8 +67,8 @@ namespace SCMS.API.Controllers
                 return Ok(new
                 {
                     token = new JwtSecurityTokenHandler().WriteToken(token),
-                    User = user
-                });
+                    User = _mapper.Map<User, GetUserDto>(user)
+                }); ;
             }
             return Unauthorized();
         }

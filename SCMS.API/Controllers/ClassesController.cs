@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using SCMS.API.DTO;
 using SCMS.API.Models;
 using SCMS.API.Repositories.Interfaces;
 using System;
@@ -37,13 +38,14 @@ namespace SCMS.API.Controllers
         }
 
         [HttpPost]
-        public IActionResult PostClass([FromBody] Class classs)
+        public IActionResult PostClass([FromBody] CreateClassDto createClassDto)
         {
-            if (classs == null)
+            if (createClassDto == null)
             {
                 return BadRequest();
             }
 
+            var classs = _mapper.Map<CreateClassDto, Class>(createClassDto);
             _classesRepository.Add(classs);
 
             if (!_classesRepository.Save())

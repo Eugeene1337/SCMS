@@ -2,7 +2,7 @@
 
 namespace SCMS.API.DTO
 {
-    public class UserGetModel
+    public class GetUserDto
     {
         public Guid Id { get; set; }
 
@@ -11,6 +11,8 @@ namespace SCMS.API.DTO
         public string Name { get; set; }
 
         public string Surname { get; set; }
+
+        public string PhoneNumber { get; set; }
 
         public DateTime BirthDate { get; set; }
 

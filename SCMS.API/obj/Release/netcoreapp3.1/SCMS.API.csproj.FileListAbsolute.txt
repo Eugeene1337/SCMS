@@ -148,3 +148,5 @@ C:\Users\zheny\source\repos\SCMS.API\SCMS.API\bin\Release\netcoreapp3.1\ru\Micro
 C:\Users\zheny\source\repos\SCMS.API\SCMS.API\bin\Release\netcoreapp3.1\tr\Microsoft.CodeAnalysis.Workspaces.resources.dll
 C:\Users\zheny\source\repos\SCMS.API\SCMS.API\bin\Release\netcoreapp3.1\zh-Hans\Microsoft.CodeAnalysis.Workspaces.resources.dll
 C:\Users\zheny\source\repos\SCMS.API\SCMS.API\bin\Release\netcoreapp3.1\zh-Hant\Microsoft.CodeAnalysis.Workspaces.resources.dll
+C:\Users\zheny\source\repos\SCMS.API\SCMS.API\bin\Release\netcoreapp3.1\AutoMapper.dll
+C:\Users\zheny\source\repos\SCMS.API\SCMS.API\bin\Release\netcoreapp3.1\AutoMapper.Extensions.Microsoft.DependencyInjection.dll

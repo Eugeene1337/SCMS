@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using SCMS.API.DTO;
 using SCMS.API.Models;
 
 namespace SCMS.API.MappingProfiles
@@ -8,6 +9,7 @@ namespace SCMS.API.MappingProfiles
         public PacketsMappings()
         {
             CreateMap<Packet, Packet>().ForMember(x => x.PacketId, opt => opt.Ignore());
+            CreateMap<Activity, CreatePacketDto>().ReverseMap();
         }
     }
 }
