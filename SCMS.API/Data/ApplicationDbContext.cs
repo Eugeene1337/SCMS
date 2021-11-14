@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using SCMS.API.Features.ActivitiesManagement.Models;
-using SCMS.API.Features.Models;
+using SCMS.API.Models;
 
 namespace SCMS.API.Data
 {
@@ -13,6 +12,8 @@ namespace SCMS.API.Data
         }
 
         public DbSet<Activity> Activities { get; set; }
+        public DbSet<Packet> Packets { get; set; }
+        public DbSet<Class> Classes { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

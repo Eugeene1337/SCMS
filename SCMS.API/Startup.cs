@@ -9,9 +9,13 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using SCMS.API.Data;
-using SCMS.API.Features.Models;
+using SCMS.API.MappingProfiles;
+using SCMS.API.Models;
 using System;
 using System.Text;
+using AutoMapper;
+using SCMS.API.Repositories.Interfaces;
+using SCMS.API.Repositories;
 
 namespace SCMS.API
 {
@@ -83,16 +87,26 @@ namespace SCMS.API
                     },
                 });
             });
-            services.AddCors(options =>
+
+            services.AddCors(o => o.AddPolicy("MyPolicy", builder =>
             {
-                options.AddDefaultPolicy(
-                    builder =>
-                    {
-                        builder.AllowAnyOrigin()   //  WithOrigins("http://localhost:3000/")  // AllowAnyOrigin - from any origin, but only GET
-                        .AllowAnyHeader()       // to be sure
-                        .AllowAnyMethod();      // for any method: POST, DELETE etc.
-                    });
-            });
+                builder.AllowAnyOrigin()
+                       .AllowAnyMethod()
+                       .AllowAnyHeader();
+            }));
+
+            services.AddAutoMapper(typeof(UsersMapping));
+            services.AddAutoMapper(typeof(ActivitiesMappings));
+            services.AddAutoMapper(typeof(ClassesMappings));
+            services.AddAutoMapper(typeof(PacketsMappings));
+
+            services.AddScoped<IUsersRepository, UsersRepository>();
+            services.AddScoped<IActivitiesRepository, ActivitiesRepository>();
+            services.AddScoped<IClassesRepository, ClassesRepository>();
+            services.AddScoped<IPacketsRepository, PacketsRepository>();
+
+            //services.AddSingleton<ISeedDataService, SeedDataService>();
+            //services.AddScoped<IFoodRepository, FoodSqlRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -102,11 +116,12 @@ namespace SCMS.API
             {
                 app.UseDeveloperExceptionPage();
             }
-
             app.UseSwagger();
             app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "CarRentalServiceApi v1"));
 
             app.UseRouting();
+
+            app.UseCors("MyPolicy");
 
             app.UseAuthentication();
             app.UseAuthorization();
