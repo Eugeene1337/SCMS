@@ -6,7 +6,14 @@ namespace SCMS.API.DTO
     {
         [Required]
         public string PacketName { get; set; }
+
         [Required]
         public double PacketPrice { get; set; }
+
+        [Required]
+        public string StripeProductId { get; set; }
+
+        [Required]
+        public string StripePriceId { get; set; }
     }
 }

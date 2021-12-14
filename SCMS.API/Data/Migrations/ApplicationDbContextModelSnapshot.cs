@@ -166,6 +166,30 @@ namespace SCMS.API.Migrations
                     b.ToTable("Activities");
                 });
 
+            modelBuilder.Entity("SCMS.API.Models.Announcement", b =>
+                {
+                    b.Property<int>("AnnouncementId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("Created")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("Modified")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Text")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("AnnouncementId");
+
+                    b.ToTable("Announcements");
+                });
+
             modelBuilder.Entity("SCMS.API.Models.Class", b =>
                 {
                     b.Property<int>("ClassId")
@@ -194,6 +218,21 @@ namespace SCMS.API.Migrations
                     b.ToTable("Classes");
                 });
 
+            modelBuilder.Entity("SCMS.API.Models.ClassEnrollment", b =>
+                {
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("ClassId")
+                        .HasColumnType("int");
+
+                    b.HasKey("UserId", "ClassId");
+
+                    b.HasIndex("ClassId");
+
+                    b.ToTable("ClassEnrollments");
+                });
+
             modelBuilder.Entity("SCMS.API.Models.Packet", b =>
                 {
                     b.Property<int>("PacketId")
@@ -207,6 +246,14 @@ namespace SCMS.API.Migrations
 
                     b.Property<double>("PacketPrice")
                         .HasColumnType("float");
+
+                    b.Property<string>("StripePriceId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("StripeProductId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("PacketId");
 
@@ -228,36 +275,6 @@ namespace SCMS.API.Migrations
                     b.ToTable("PacketsActivities");
                 });
 
-            modelBuilder.Entity("SCMS.API.Models.PacketsPayments", b =>
-                {
-                    b.Property<int>("PacketId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("PaymentId")
-                        .HasColumnType("int");
-
-                    b.HasKey("PacketId", "PaymentId");
-
-                    b.HasIndex("PaymentId");
-
-                    b.ToTable("PacketsPayments");
-                });
-
-            modelBuilder.Entity("SCMS.API.Models.PacketsUsers", b =>
-                {
-                    b.Property<int>("PacketId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("PacketId", "UserId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("PacketsUsers");
-                });
-
             modelBuilder.Entity("SCMS.API.Models.Payment", b =>
                 {
                     b.Property<int>("PaymentId")
@@ -268,6 +285,12 @@ namespace SCMS.API.Migrations
                     b.Property<DateTime>("DateTime")
                         .HasColumnType("datetime2");
 
+                    b.Property<bool>("IsDone")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("PacketId")
+                        .HasColumnType("int");
+
                     b.Property<double>("PaymentAmount")
                         .HasColumnType("float");
 
@@ -277,9 +300,42 @@ namespace SCMS.API.Migrations
 
                     b.HasKey("PaymentId");
 
+                    b.HasIndex("PacketId");
+
                     b.HasIndex("UserId");
 
                     b.ToTable("Payments");
+                });
+
+            modelBuilder.Entity("SCMS.API.Models.Subscription", b =>
+                {
+                    b.Property<Guid>("SubscriptionId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("Created")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime>("Modified")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("PacketId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("SubscriptionId");
+
+                    b.HasIndex("PacketId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Subscriptions");
                 });
 
             modelBuilder.Entity("SCMS.API.Models.User", b =>
@@ -342,6 +398,9 @@ namespace SCMS.API.Migrations
                     b.Property<string>("PostCode")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Role")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("nvarchar(max)");
 
@@ -366,21 +425,6 @@ namespace SCMS.API.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers");
-                });
-
-            modelBuilder.Entity("SCMS.API.Models.UsersClasses", b =>
-                {
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<int>("ClassId")
-                        .HasColumnType("int");
-
-                    b.HasKey("UserId", "ClassId");
-
-                    b.HasIndex("ClassId");
-
-                    b.ToTable("UsersClasses");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -447,6 +491,21 @@ namespace SCMS.API.Migrations
                         .HasForeignKey("TrainerUserId");
                 });
 
+            modelBuilder.Entity("SCMS.API.Models.ClassEnrollment", b =>
+                {
+                    b.HasOne("SCMS.API.Models.Class", null)
+                        .WithMany()
+                        .HasForeignKey("ClassId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("SCMS.API.Models.User", null)
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("SCMS.API.Models.PacketsActivities", b =>
                 {
                     b.HasOne("SCMS.API.Models.Activity", null)
@@ -462,38 +521,14 @@ namespace SCMS.API.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("SCMS.API.Models.PacketsPayments", b =>
-                {
-                    b.HasOne("SCMS.API.Models.Packet", null)
-                        .WithMany()
-                        .HasForeignKey("PacketId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("SCMS.API.Models.Payment", null)
-                        .WithMany()
-                        .HasForeignKey("PaymentId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("SCMS.API.Models.PacketsUsers", b =>
-                {
-                    b.HasOne("SCMS.API.Models.Packet", null)
-                        .WithMany()
-                        .HasForeignKey("PacketId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("SCMS.API.Models.User", null)
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("SCMS.API.Models.Payment", b =>
                 {
+                    b.HasOne("SCMS.API.Models.Packet", null)
+                        .WithMany()
+                        .HasForeignKey("PacketId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
                     b.HasOne("SCMS.API.Models.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
@@ -501,11 +536,11 @@ namespace SCMS.API.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("SCMS.API.Models.UsersClasses", b =>
+            modelBuilder.Entity("SCMS.API.Models.Subscription", b =>
                 {
-                    b.HasOne("SCMS.API.Models.Class", null)
+                    b.HasOne("SCMS.API.Models.Packet", null)
                         .WithMany()
-                        .HasForeignKey("ClassId")
+                        .HasForeignKey("PacketId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

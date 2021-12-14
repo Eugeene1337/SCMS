@@ -15,11 +15,11 @@ namespace SCMS.API.Data
         public DbSet<Packet> Packets { get; set; }
         public DbSet<Class> Classes { get; set; }
         public DbSet<Payment> Payments { get; set; }
-        public DbSet<PacketsUsers> PacketsUsers { get; set; }
+        public DbSet<Subscription> Subscriptions { get; set; }
         public DbSet<PacketsActivities> PacketsActivities { get; set; }
-        public DbSet<PacketsPayments> PacketsPayments { get; set; }
-        public DbSet<UsersClasses> UsersClasses { get; set; }
-
+        public DbSet<ClassEnrollment> ClassEnrollments { get; set; }
+        public DbSet<Announcement> Announcements { get; set; }
+        
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder); // create tables for Identity
@@ -39,21 +39,23 @@ namespace SCMS.API.Data
                         .WithMany()
                         .HasForeignKey("UserId");
 
+            modelBuilder.Entity<Payment>()
+                        .HasOne(typeof(Packet))
+                        .WithMany()
+                        .HasForeignKey("PacketId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<Subscription>()
+                        .HasOne(typeof(User))
+                        .WithMany()
+                        .HasForeignKey("UserId");
+
+            modelBuilder.Entity<Subscription>()
+                        .HasOne(typeof(Packet))
+                        .WithMany()
+                        .HasForeignKey("PacketId");
+
             //ManyToMany relations
-
-            //PacketsUsers
-            modelBuilder.Entity<PacketsUsers>()
-                .HasKey(t => new { t.PacketId, t.UserId });
-
-            modelBuilder.Entity<PacketsUsers>()
-                .HasOne(typeof(Packet))
-                .WithMany()
-                .HasForeignKey("PacketId");
-
-            modelBuilder.Entity<PacketsUsers>()
-                .HasOne(typeof(User))
-                .WithMany()
-                .HasForeignKey("UserId");
 
             //PacketsActivities
             modelBuilder.Entity<PacketsActivities>()
@@ -69,30 +71,16 @@ namespace SCMS.API.Data
                 .WithMany()
                 .HasForeignKey("ActivityId");
 
-            //PacketsPayments
-            modelBuilder.Entity<PacketsPayments>()
-                .HasKey(t => new { t.PacketId, t.PaymentId });
-
-            modelBuilder.Entity<PacketsPayments>()
-                .HasOne(typeof(Packet))
-                .WithMany()
-                .HasForeignKey("PacketId");
-
-            modelBuilder.Entity<PacketsPayments>()
-                .HasOne(typeof(Payment))
-                .WithMany()
-                .HasForeignKey("PaymentId");
-
-            //UsersClasses
-            modelBuilder.Entity<UsersClasses>()
+            //ClassEnrollments
+            modelBuilder.Entity<ClassEnrollment>()
                 .HasKey(t => new { t.UserId, t.ClassId });
 
-            modelBuilder.Entity<UsersClasses>()
+            modelBuilder.Entity<ClassEnrollment>()
                 .HasOne(typeof(User))
                 .WithMany()
                 .HasForeignKey("UserId");
 
-            modelBuilder.Entity<UsersClasses>()
+            modelBuilder.Entity<ClassEnrollment>()
                 .HasOne(typeof(Class))
                 .WithMany()
                 .HasForeignKey("ClassId");

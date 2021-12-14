@@ -27,6 +27,13 @@ namespace SCMS.API.Controllers
             return _mapper.Map<List<User>, List<GetUserDto>>(_userRepository.GetAll());
         }
 
+        [HttpGet]
+        [Route("[action]")]
+        public ActionResult<IEnumerable<GetUserDto>> GetTrainers()
+        {
+            return _mapper.Map<List<User>, List<GetUserDto>>(_userRepository.GetTrainers());
+        }
+
         [HttpGet("{id}")]
         public ActionResult<GetUserDto> GetUser(Guid id)
         {

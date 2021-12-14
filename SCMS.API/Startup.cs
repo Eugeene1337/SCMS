@@ -13,9 +13,15 @@ using SCMS.API.MappingProfiles;
 using SCMS.API.Models;
 using System;
 using System.Text;
-using AutoMapper;
 using SCMS.API.Repositories.Interfaces;
 using SCMS.API.Repositories;
+using Stripe;
+using SCMS.API.Services.Interfaces;
+using SCMS.API.Services;
+using SCMS.API.Converters.Interfaces;
+using SCMS.API.Converters;
+using SubscriptionService = SCMS.API.Services.SubscriptionService;
+using Microsoft.Extensions.Options;
 
 namespace SCMS.API
 {
@@ -95,23 +101,36 @@ namespace SCMS.API
                        .AllowAnyHeader();
             }));
 
-            services.AddAutoMapper(typeof(UsersMapping));
-            services.AddAutoMapper(typeof(ActivitiesMappings));
-            services.AddAutoMapper(typeof(ClassesMappings));
-            services.AddAutoMapper(typeof(PacketsMappings));
+            services.Configure<StreamChatConfig>(Configuration.GetSection(nameof(StreamChatConfig)));
+            services.AddSingleton<IStreamChatConfig>(x => x.GetRequiredService<IOptions<StreamChatConfig>>().Value);
+
+            services.AddAutoMapper(typeof(UsersMappingProfile));
+            services.AddAutoMapper(typeof(ActivitiesMappingProfile));
+            services.AddAutoMapper(typeof(ClassesMappingProfile));
+            services.AddAutoMapper(typeof(PacketsMappingProfile));
+            services.AddAutoMapper(typeof(AnnouncementsMappingProfile));
 
             services.AddScoped<IUsersRepository, UsersRepository>();
             services.AddScoped<IActivitiesRepository, ActivitiesRepository>();
             services.AddScoped<IClassesRepository, ClassesRepository>();
             services.AddScoped<IPacketsRepository, PacketsRepository>();
+            services.AddScoped<IPaymentsRepository, PaymentsRepository>();
+            services.AddScoped<ISubscriptionsRepository, SubscriptionsRepository>();
+            services.AddScoped<IAnnouncementsRepository, AnnouncementsRepository>();
 
-            //services.AddSingleton<ISeedDataService, SeedDataService>();
+            services.AddScoped<IStripeSessionService, StripeSessionService>();
+            services.AddScoped<ISubscriptionService, SubscriptionService>();
+            services.AddScoped<IClassesReportService, ClassesReportService>();
+            services.AddScoped<IStreamChatService, StreamChatService>();
+            services.AddScoped<IClassesConverter, ClassesConverter>();
             //services.AddScoped<IFoodRepository, FoodSqlRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            StripeConfiguration.ApiKey = Configuration["Stripe:SecretApiKey"];
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();

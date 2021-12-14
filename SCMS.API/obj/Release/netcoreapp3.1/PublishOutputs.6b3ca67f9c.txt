@@ -13,6 +13,7 @@ C:\Users\zheny\source\repos\SCMS.API\SCMS.API\obj\Release\netcoreapp3.1\PubTmp\O
 C:\Users\zheny\source\repos\SCMS.API\SCMS.API\obj\Release\netcoreapp3.1\PubTmp\Out\Microsoft.AspNetCore.JsonPatch.dll
 C:\Users\zheny\source\repos\SCMS.API\SCMS.API\obj\Release\netcoreapp3.1\PubTmp\Out\Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
 C:\Users\zheny\source\repos\SCMS.API\SCMS.API\obj\Release\netcoreapp3.1\PubTmp\Out\Microsoft.AspNetCore.Razor.Language.dll
+C:\Users\zheny\source\repos\SCMS.API\SCMS.API\obj\Release\netcoreapp3.1\PubTmp\Out\Microsoft.Bcl.AsyncInterfaces.dll
 C:\Users\zheny\source\repos\SCMS.API\SCMS.API\obj\Release\netcoreapp3.1\PubTmp\Out\Microsoft.CodeAnalysis.dll
 C:\Users\zheny\source\repos\SCMS.API\SCMS.API\obj\Release\netcoreapp3.1\PubTmp\Out\Microsoft.CodeAnalysis.CSharp.dll
 C:\Users\zheny\source\repos\SCMS.API\SCMS.API\obj\Release\netcoreapp3.1\PubTmp\Out\Microsoft.CodeAnalysis.CSharp.Workspaces.dll
@@ -52,6 +53,8 @@ C:\Users\zheny\source\repos\SCMS.API\SCMS.API\obj\Release\netcoreapp3.1\PubTmp\O
 C:\Users\zheny\source\repos\SCMS.API\SCMS.API\obj\Release\netcoreapp3.1\PubTmp\Out\Newtonsoft.Json.dll
 C:\Users\zheny\source\repos\SCMS.API\SCMS.API\obj\Release\netcoreapp3.1\PubTmp\Out\Newtonsoft.Json.Bson.dll
 C:\Users\zheny\source\repos\SCMS.API\SCMS.API\obj\Release\netcoreapp3.1\PubTmp\Out\NuGet.Frameworks.dll
+C:\Users\zheny\source\repos\SCMS.API\SCMS.API\obj\Release\netcoreapp3.1\PubTmp\Out\stream-chat-net.dll
+C:\Users\zheny\source\repos\SCMS.API\SCMS.API\obj\Release\netcoreapp3.1\PubTmp\Out\Stripe.net.dll
 C:\Users\zheny\source\repos\SCMS.API\SCMS.API\obj\Release\netcoreapp3.1\PubTmp\Out\Swashbuckle.AspNetCore.dll
 C:\Users\zheny\source\repos\SCMS.API\SCMS.API\obj\Release\netcoreapp3.1\PubTmp\Out\Swashbuckle.AspNetCore.Swagger.dll
 C:\Users\zheny\source\repos\SCMS.API\SCMS.API\obj\Release\netcoreapp3.1\PubTmp\Out\Swashbuckle.AspNetCore.SwaggerGen.dll

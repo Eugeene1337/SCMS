@@ -39,5 +39,15 @@ namespace SCMS.API.Repositories
         {
             return (_context.SaveChanges() >= 0);
         }
+
+        public List<User> GetTrainers()
+        {
+            var users = GetAll();
+            var trainers = from user in users
+                           where user.Role == UserRoles.Employee
+                              select user;
+
+            return trainers.ToList();
+        }
     }
 }

@@ -14,5 +14,12 @@ namespace SCMS.API.Models
 
         [Required]
         public double PacketPrice { get; set; }
+
+        [Required]
+        public string StripeProductId { get; set; }
+
+        [Required]
+        public string StripePriceId { get; set; }
+
     }
 }

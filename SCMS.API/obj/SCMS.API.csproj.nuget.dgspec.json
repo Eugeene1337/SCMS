@@ -78,6 +78,10 @@
               "target": "Package",
               "version": "[3.1.5, )"
             },
+            "Stripe.net": {
+              "target": "Package",
+              "version": "[39.77.0, )"
+            },
             "Swashbuckle.AspNetCore": {
               "target": "Package",
               "version": "[5.0.0-rc2, )"
@@ -89,6 +93,10 @@
             "Swashbuckle.AspNetCore.SwaggerUI": {
               "target": "Package",
               "version": "[5.0.0-rc2, )"
+            },
+            "stream-chat-net": {
+              "target": "Package",
+              "version": "[0.24.0, )"
             }
           },
           "imports": [

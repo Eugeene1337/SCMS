@@ -18,5 +18,7 @@ namespace SCMS.API.Models
         public string AddressStreet { get; set; }
 
         public string AddressNumber { get; set; }
+
+        public string Role { get; set; }
     }
 }

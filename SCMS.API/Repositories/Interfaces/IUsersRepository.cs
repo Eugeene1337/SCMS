@@ -9,6 +9,7 @@ namespace SCMS.API.Repositories.Interfaces
     {
         User GetSingle(Guid id);
         List<User> GetAll();
+        List<User> GetTrainers();
         void Update(User user);
         void Delete(Guid id);
         public bool Save();

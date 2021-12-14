@@ -150,3 +150,6 @@ C:\Users\zheny\source\repos\SCMS.API\SCMS.API\bin\Debug\netcoreapp3.1\runtimes\w
 C:\Users\zheny\source\repos\SCMS.API\SCMS.API\bin\Debug\netcoreapp3.1\runtimes\win\lib\netstandard2.0\System.Runtime.Caching.dll
 C:\Users\zheny\source\repos\SCMS.API\SCMS.API\bin\Debug\netcoreapp3.1\AutoMapper.dll
 C:\Users\zheny\source\repos\SCMS.API\SCMS.API\bin\Debug\netcoreapp3.1\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
+C:\Users\zheny\source\repos\SCMS.API\SCMS.API\bin\Debug\netcoreapp3.1\Microsoft.Bcl.AsyncInterfaces.dll
+C:\Users\zheny\source\repos\SCMS.API\SCMS.API\bin\Debug\netcoreapp3.1\Stripe.net.dll
+C:\Users\zheny\source\repos\SCMS.API\SCMS.API\bin\Debug\netcoreapp3.1\stream-chat-net.dll

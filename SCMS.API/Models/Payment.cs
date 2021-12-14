@@ -16,6 +16,11 @@ namespace SCMS.API.Models
         public string UserId { get; set; }
 
         [Required]
+        public int PacketId { get; set; }
+
+        public bool IsDone { get; set; }
+
+        [Required]
         public DateTime DateTime { get; set; }
     }
 }
