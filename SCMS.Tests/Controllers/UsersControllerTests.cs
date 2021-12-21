@@ -86,7 +86,7 @@ namespace SCMS.Tests.Controllers
         }
 
         [Test]
-        public void DeleteAnnouncement_Should_DeleteUser()
+        public void DeleteUser_Should_DeleteUser()
         {
             var id = Guid.NewGuid();
 

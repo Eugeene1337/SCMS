@@ -20,7 +20,7 @@ namespace SCMS.API.Services
         {
             var existingSubscription = FindSubscription(userId, packetId);
 
-            if(existingSubscription != null)
+            if(existingSubscription != null && existingSubscription.IsActive)
             {
                 throw new Exception($"subscription with parameters userId : [{userId}], packetId : [{packetId}] already exists!");
             }
@@ -72,9 +72,8 @@ namespace SCMS.API.Services
                 throw new System.ArgumentNullException();
             }
 
-            subscription.IsActive = false;
             subscription.ValidTo = DateTime.Today.AddMonths(1);
-            subscription.ValidTo.AddDays(-subscription.ValidTo.Day+1);
+            subscription.ValidTo = subscription.ValidTo.AddDays(-subscription.ValidTo.Day+1);
 
             _subscriptionsRepository.Update(subscription);
 

@@ -44,11 +44,6 @@ namespace SCMS.API.Controllers
                     _subscriptionService.ActivateSubscription(subscription.SubscriptionId);
                     _streamChatService.CreateChannelWithTrainer(subscription.UserId);
                 }
-                else if (stripeEvent.Type == Events.PaymentIntentCanceled)
-                {
-                    var subscription = _subscriptionService.GetLastSubscription();
-                    _subscriptionService.DectivateSubscription(subscription.SubscriptionId);
-                }
                 // ... handle other event types
                 else
                 {

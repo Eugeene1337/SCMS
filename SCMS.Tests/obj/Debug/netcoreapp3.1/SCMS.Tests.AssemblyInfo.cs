@@ -11,6 +11,7 @@
 using System;
 using System.Reflection;
 
+[assembly: Microsoft.AspNetCore.Mvc.Testing.WebApplicationFactoryContentRootAttribute("SCMS.API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null", "C:\\Users\\zheny\\source\\repos\\SCMS.API\\SCMS.API", "SCMS.API.csproj", "0")]
 [assembly: System.Reflection.AssemblyCompanyAttribute("SCMS.Tests")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]

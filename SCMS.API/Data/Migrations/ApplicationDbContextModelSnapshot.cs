@@ -177,7 +177,7 @@ namespace SCMS.API.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("CreatedBy")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<DateTime>("Modified")
                         .HasColumnType("datetime2");
@@ -186,6 +186,8 @@ namespace SCMS.API.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("AnnouncementId");
+
+                    b.HasIndex("CreatedBy");
 
                     b.ToTable("Announcements");
                 });
@@ -328,6 +330,9 @@ namespace SCMS.API.Migrations
                     b.Property<string>("UserId")
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime>("ValidTo")
+                        .HasColumnType("datetime2");
 
                     b.HasKey("SubscriptionId");
 
@@ -476,6 +481,13 @@ namespace SCMS.API.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("SCMS.API.Models.Announcement", b =>
+                {
+                    b.HasOne("SCMS.API.Models.User", null)
+                        .WithMany()
+                        .HasForeignKey("CreatedBy");
                 });
 
             modelBuilder.Entity("SCMS.API.Models.Class", b =>

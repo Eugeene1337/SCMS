@@ -14,7 +14,7 @@ namespace SCMS.Tests.Controllers
     {
         private ActivitiesController _controller;
 
-        private  Mock<IActivitiesRepository> _activitiesRepositoryMock;
+        private Mock<IActivitiesRepository> _activitiesRepositoryMock;
         private IMapper _mapper;
 
         [SetUp]

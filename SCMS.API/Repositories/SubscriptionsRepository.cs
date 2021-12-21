@@ -21,7 +21,7 @@ namespace SCMS.API.Repositories
             var subs = _context.Subscriptions.ToList();
             foreach (var sub in subs)
             {
-                if (DateTime.Now > sub.ValidTo)
+                if (DateTime.Now > sub.ValidTo && DateTime.Now.Year+1 == sub.ValidTo.Year)
                 {
                     sub.IsActive = false;
                     Update(sub);
@@ -34,7 +34,7 @@ namespace SCMS.API.Repositories
         public Subscription GetSingle(Guid id)
         {
             var sub = _context.Subscriptions.Find(id);
-            if (DateTime.Now > sub.ValidTo)
+            if (DateTime.Now > sub.ValidTo && DateTime.Now.Year+1 == sub.ValidTo.Year)
             {
                 sub.IsActive = false;
                 Update(sub);

@@ -55,6 +55,10 @@ namespace SCMS.API.Data
                         .WithMany()
                         .HasForeignKey("PacketId");
 
+            modelBuilder.Entity<Announcement>()
+                        .HasOne(typeof(User))
+                        .WithMany()
+                        .HasForeignKey("CreatedBy");
             //ManyToMany relations
 
             //PacketsActivities
